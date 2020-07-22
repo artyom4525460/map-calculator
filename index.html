@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>Estimate Pricing</title>
+    </head>
+    <body>
+        <section id="map-section">
+            <div id="map">
+            </div>
+        </section>
+        <section id="calculator-section">
+            <div class="title">
+                <h2>Estimate Pricing</h2>
+                <span class="selected-category">Real Estate</span>
+            </div>
+            <div class="calculator">
+                <button id="minus" class="calculator-button"><img src="./images/minus.png" alt="minus"></button>	
+                <input type="range" min="1" max="100" step="1" id="radius-slider">
+                <button id="plus" class="calculator-button"><img src="./images/plus.png" alt="plus"></button>
+            </div>
+            <div class="legend">
+                <div class="item">Radius: <span id="radius-value">1</span> KM</div>
+                <div class="item">Cost / KM / Day: <span id="calculated-cost">100</span> <span class="currency">PKR</span></div>
+            </div>
+        </section>
+        <section id="info-section">
+            <div class="item">
+                <div class="main-text">Placement (Monthly): <span id="mouthly-cost">3,000</span> <span class="currency">PKR</span></div>
+                <div class="under-text">100 PKR Daily to enable your listing on One Call App and https://near.market</div>
+            </div>
+            <div class="item">
+                <div class="main-text">Estimated mounthly leads: <span class="leads">30</span></div>
+                <div class="under-text">Selected area has estimated 30 mounthly leads in your Real Estate category</div>
+            </div>
+            <div class="item">
+                <div class="main-text">Cost / Accepted Lead: 100 <span class="currency">PKR</span></div>
+                <div class="under-text">You will be only charged for the accepted leads.</div>
+            </div>
+        </section>
+        <section id="form-section">
+            <form action="/" type="post">
+                <input type="hidden" name="business_latlng" value="">
+                <input type="hidden" name="user_id" value="">
+                <input type="hidden" name="category" value="">
+                <input type="hidden" name="amount" value="">
+                <div class="checkbox-buttons">
+                    <div class="checkbox-button">
+                        <input type="checkbox" id="leads_from_marked_area" name="leads_from_marked_area" checked>
+                        <label for="leads_from_marked_area">From the Area</label>
+                    </div>
+                    <div class="checkbox-button">
+                        <input type="checkbox" id="leads_from_people_interested_in_area" name="leads_from_people_interested_in_area" checked>
+                        <label for="leads_from_people_interested_in_area-in-the-area">Interested in the Area</label>
+                    </div>
+                </div>
+                <div class="info-blocks">
+                    <div class="item active">
+                        <div class="text">Estimated Total</div>
+                        <div class="price"><span id="estimate-total-cost">6,000</span> <span class="currency">PKR</span></div>
+                    </div>
+                    <div class="item">
+                        <div class="text">Minimum Load</div>
+                        <div class="price"><span id="minimum-load">1,000</span> <span class="currency">PKR</span></div>
+                    </div>
+                </div>
+                <div class="button-block">
+                    <button class="primary-btn">Pay Now <span id="total-cost">6,000</span> <span class="currency">PKR</span></button>
+                </div>
+            </form>
+        </section>
+    </body>
+</html>
