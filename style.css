@@ -1,7 +1,9 @@
 
+/*-----------------------*/
 /*
     Default
 */
+/*-----------------------*/
 
 body{
     margin: 0;
@@ -10,13 +12,24 @@ body{
     background: #004068;
 }
 
+.estimate-pricing-section{
+    max-width: 700px;
+    margin: 0 auto;
+    color: #ffffff;
+}
+
+
+
+/*-----------------------*/
 /*
     Map Section
 */
+/*-----------------------*/
 
 #map{
-    height: 400px;
-    width: 400px;
+    height: 75vw;
+    max-height: 500px;
+    width: 100%;
 }
 
 /*div#map a,
@@ -25,9 +38,16 @@ div.gm-bundled-control div.gmnoprint {
     display: none !important;
 }*/
 
+
+
+/*-----------------------*/
 /*
     Calculator Section
 */
+/*-----------------------*/
+#calculator-section{
+    padding: 0 8px 10px;
+}
 
 #calculator-section button{
     width: 35px;
@@ -37,14 +57,40 @@ div.gm-bundled-control div.gmnoprint {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 0;
+    border-radius: 5px;
+    background: #ffffff;
+}
+
+#calculator-section .title{
+    display: flex;
+    justify-content: space-between;
+}
+#calculator-section .title h2{
+    margin: 0;
+    line-height: 40px;
+    font-size: 22px;
+    font-weight: 100;
+}
+#calculator-section .title .selected-category{
+    font-size: 16px;
+    line-height: 38px;
+    text-align: right;
 }
 
 #calculator-section .calculator{
     display: flex;
+    align-items: center;
+}
+
+#calculator-section .calculator .slider-box{
+    width: 100%;
+    padding: 0px 5px 0px 1px;
 }
 
 #radius-slider {
     -webkit-appearance: none;
+    width: 100%;
     height: 10px;
     border-radius: 5px;  
     background: #d8d8d8;
@@ -70,4 +116,131 @@ div.gm-bundled-control div.gmnoprint {
     border-radius: 5px; 
     background: #004eff;
     cursor: pointer;
+}
+
+#calculator-section .legend{
+    text-align: center;
+    font-size: 12px;
+}
+
+
+/*-----------------------*/
+/*
+    Info Section
+*/
+/*-----------------------*/
+
+#info-section{
+    background: #007ca2;
+    padding: 2px 16px 4px;
+}
+
+#info-section .item{
+    padding: 4px 0;
+}
+
+#info-section .item .main-text{
+    font-size: 16px;
+}
+
+#info-section .item .under-text{
+    font-size: 9px;
+    opacity: 0.8;
+}
+
+
+/*-----------------------*/
+/*
+    Form Section
+*/
+/*-----------------------*/
+
+#form-section{
+    padding: 10px 16px;
+}
+
+#form-section .checkbox-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+#form-section .checkbox-buttons .checkbox-button{
+    padding: 5px 0;
+    font-size: 14px;
+}
+#form-section .checkbox-buttons .checkbox-button label{
+    display: flex;
+    position: relative;
+    cursor: pointer;
+}
+#form-section .checkbox-buttons .checkbox-button label::before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border-radius: 10px;
+    margin-right: 7px;
+    background: #ffffff;
+}
+
+#form-section .checkbox-buttons .checkbox-button label::after{
+    content: url('./images/check.png');
+    position: absolute;
+    left: 4px;
+    top: -1px;
+}
+
+#form-section .checkbox-buttons .checkbox-button input:not(:checked)+label::after {
+    display: none;
+}
+
+#form-section .checkbox-buttons .checkbox-button input{
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+
+#form-section .info-blocks{
+    padding: 12px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#form-section .info-blocks .item{
+    width: 127px;
+    padding: 8px 17px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#form-section .info-blocks .item.active{
+    border: 1px solid #ffffff;
+}
+
+#form-section .button-block{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#form-section .button-block .primary-btn{
+    width: 155px;
+    height: 32px;
+    border: 0px;
+    display: flex;
+    border-radius: 5px;
+    background: #21ac00;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: #ffffff;
+    -webkit-transition: background-color .4s, -webkit-transform .4s;
+    transition: background-color .4s, transform .4s;
+}
+
+#form-section .button-block .primary-btn:hover{
+    background: #359d1c;
 }
