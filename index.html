@@ -1,6 +1,12 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>Estimate Pricing</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="style.css" rel="stylesheet">
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKDRayfDLyjVxpYMwP0xLOiZztX-YZZg8&callback=initMap">
+        </script>
     </head>
     <body>
         <section id="map-section">
@@ -13,9 +19,15 @@
                 <span class="selected-category">Real Estate</span>
             </div>
             <div class="calculator">
-                <button id="minus" class="calculator-button"><img src="./images/minus.png" alt="minus"></button>	
-                <input type="range" min="1" max="100" step="1" id="radius-slider">
-                <button id="plus" class="calculator-button"><img src="./images/plus.png" alt="plus"></button>
+                <div class="button-box">
+                    <button id="minus" class="calculator-button"><img src="./images/minus.png" alt="minus"></button>
+                </div>	
+                <div class="slider-box">
+                    <input type="range" min="1" max="100" step="1" id="radius-slider">
+                </div>
+                <div class="button-box">
+                    <button id="plus" class="calculator-button"><img src="./images/plus.png" alt="plus"></button>
+                </div>
             </div>
             <div class="legend">
                 <div class="item">Radius: <span id="radius-value">1</span> KM</div>
@@ -37,18 +49,18 @@
             </div>
         </section>
         <section id="form-section">
-            <form action="/" type="post">
+            <form action="" type="post">
                 <input type="hidden" name="business_latlng" value="">
                 <input type="hidden" name="user_id" value="">
                 <input type="hidden" name="category" value="">
                 <input type="hidden" name="amount" value="">
                 <div class="checkbox-buttons">
                     <div class="checkbox-button">
-                        <input type="checkbox" id="leads_from_marked_area" name="leads_from_marked_area" checked>
+                        <input type="checkbox" id="leads_from_marked_area" name="leads_from_marked_area" value="true" checked>
                         <label for="leads_from_marked_area">From the Area</label>
                     </div>
                     <div class="checkbox-button">
-                        <input type="checkbox" id="leads_from_people_interested_in_area" name="leads_from_people_interested_in_area" checked>
+                        <input type="checkbox" id="leads_from_people_interested_in_area" name="leads_from_people_interested_in_area" value="true">
                         <label for="leads_from_people_interested_in_area-in-the-area">Interested in the Area</label>
                     </div>
                 </div>
@@ -67,5 +79,6 @@
                 </div>
             </form>
         </section>
+        <script src="script.js"></script>
     </body>
 </html>
