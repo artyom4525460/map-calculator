@@ -39,6 +39,16 @@ var element = {
   plus            : document.getElementById("plus"),
   radiusValue     : document.getElementById("radius-value"),
   calculatedCost  : document.getElementById("calculated-cost"),
+  mouthlyCost     : document.getElementById("mouthly-cost"),
+  mouthlyLeads    : document.getElementById("mouthly-leads"),
+/*
+  leadsFromMarkedArea : document.getElementById("leads_from_marked_area"),
+  leadsFromPeopleInterestedInArea : document.getElementById("leads_from_people_interested_in_area"),
+*/
+  estimateTotalCost    : document.getElementById("estimate-total-cost"),
+  minimumLoad  : document.getElementById("minimum-load"),
+  totalCost  : document.getElementById("total-cost"),
+
   
   disable: function(element){
     element.classList.add('block-element');
@@ -46,14 +56,35 @@ var element = {
   enable: function(element){
     element.classList.remove('block-element');
   },
+  clearNumber: function(number){
+    return number.replace(/[\s.,%]/g, '');
+  },
+  formatNumber: function(number){
+    number = number.toString();
+    let pattern = /(-?\d+)(\d{3})/;
+    while (pattern.test(number))
+      number = number.replace(pattern, "$1,$2");
+    return number;
+  },
   initElements: function(){
-    this.radiusValue.innerHTML = slider.size.value;
+    this.updateElements();
+
+    
     if(slider.size.value == 1){
       element.disable(element.minus);
     }
     if(slider.size.value == 100){
       element.disable(element.plus);
     }
+  },
+  updateElements: function(){
+    this.radiusValue.innerHTML = slider.size.value;
+    this.calculatedCost.innerHTML = this.formatNumber(this.clearNumber(this.radiusValue.innerHTML) * 100);
+    this.mouthlyCost.innerHTML = this.formatNumber(this.clearNumber(this.calculatedCost.innerHTML) * 30);
+    this.mouthlyLeads.innerHTML = this.formatNumber(this.clearNumber(this.radiusValue.innerHTML) * 30);
+
+    this.estimateTotalCost.innerHTML = this.formatNumber(this.mouthlyCost.innerHTML);
+    this.totalCost.innerHTML = this.estimateTotalCost.innerHTML;
   }
 }
 
@@ -87,7 +118,13 @@ var slider = {
 
   updateValue: function(){
     mapObj.updateCircle();
-    element.radiusValue.innerHTML = this.size.value;
+    element.updateElements();
+    /*element.radiusValue.innerHTML = this.size.value;
+    element.calculatedCost.innerHTML = element.formatNumber(element.radiusValue.innerHTML * 100);
+    element.mouthlyCost.innerHTML = element.formatNumber(element.calculatedCost.innerHTML * 30);
+    element.mouthlyLeads.innerHTML = element.formatNumber(element.radiusValue.innerHTML * 30);
+
+    element.estimateTotalCost.innerHTML = element.formatNumber(element.mouthlyCost.innerHTML);*/
   },
 
   moveButton: function(){
