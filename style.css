@@ -18,7 +18,10 @@ body{
     color: #ffffff;
 }
 
-
+.block-element{
+    opacity: 0.7;
+    cursor: default;
+}
 
 /*-----------------------*/
 /*
