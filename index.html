@@ -21,7 +21,7 @@
                     <button id="minus" class="calculator-button" onclick="slider.reduceValue()"><img src="./images/minus.png" alt="minus"></button>
                 </div>	
                 <div class="slider-box">
-                    <input type="range" min="1" max="100" value="2" step="1" id="radius-slider" onchange="slider.moveButton()">
+                    <input type="range" min="1" max="100" value="1" step="1" id="radius-slider" onchange="slider.moveButton()">
                 </div>
                 <div class="button-box">
                     <button id="plus" class="calculator-button" onclick="slider.increaseValue()"><img src="./images/plus.png" alt="plus"></button>
@@ -47,10 +47,10 @@
             </div>
         </section>
         <section class="estimate-pricing-section" id="form-section">
-            <form action="" type="post">
-                <input type="hidden" name="business_latlng" value="">
-                <input type="hidden" name="user_id" value="">
-                <input type="hidden" name="category" value="">
+            <form type="post">
+                <input type="hidden" name="business_latlng" value='{"lat":43.651499,"lng":-79.383466}'>
+                <input type="hidden" name="user_id" value="5412">
+                <input type="hidden" name="category" value="Real Estate">
                 <input type="hidden" name="amount" value="">
                 <div class="checkbox-buttons">
                     <div class="checkbox-button">
@@ -63,17 +63,17 @@
                     </div>
                 </div>
                 <div class="info-blocks">
-                    <div class="item active">
+                    <div class="item active" onclick="element.changeOption('estimate-total-cost')">
                         <div class="text">Estimated Total</div>
                         <div class="price"><span id="estimate-total-cost">6,000</span> <span class="currency">PKR</span></div>
                     </div>
-                    <div class="item">
+                    <div class="item" onclick="element.changeOption('minimum-load')">
                         <div class="text">Minimum Load</div>
                         <div class="price"><span id="minimum-load">1,000</span> <span class="currency">PKR</span></div>
                     </div>
                 </div>
                 <div class="button-block">
-                    <button class="primary-btn">Pay Now&nbsp;<span id="total-cost">6,000</span> <span class="currency">PKR</span></button>
+                    <button class="primary-btn" id="payButton">Pay Now&nbsp;<span id="total-cost">6,000</span> <span class="currency">PKR</span></button>
                 </div>
             </form>
         </section>
