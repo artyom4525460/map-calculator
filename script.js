@@ -216,7 +216,7 @@ $('#payButton').on('click', function(e) {
   alert(JSON.stringify(data));
 
   $.ajax({
-    url: "https://google.com",
+    url: "https://test.url",
     method: "POST",
     data: data,
     dataType: 'json'
