@@ -1,14 +1,14 @@
 var map, marker, circle;
-var myLatLng = {lat: 43.651499, lng: -79.383466};
+var latLng = {lat: 43.651499, lng: -79.383466};
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: myLatLng,
+    center: latLng,
     zoom: mapObj.getZoom(),
     disableDefaultUI: true
   });
   marker = new google.maps.Marker({
-    position: myLatLng,
+    position: latLng,
     map: map,
     icon: './images/baloon.png'
   });
@@ -17,8 +17,8 @@ function initMap() {
     fillColor: "#23ACBD",
     fillOpacity: 0.35,
     map: map,
-    center: myLatLng,
-    radius: 1000 * slider.size.value
+    center: latLng,
+    radius: 1000 * slider.size.val()
   });
 }
 
@@ -61,42 +61,42 @@ var mapObj = {
       }
     ],
   updateCircle: function(){
-    circle.setRadius(1000 * slider.size.value);
+    circle.setRadius(1000 * slider.size.val());
   },
   updateScale: function(){
-    map.panTo(myLatLng)
+    map.panTo(latLng)
     let zoom = this.getZoom();
     map.setZoom(zoom);
   },
   getZoom: function(){
-    return this.scaleParams.find(scaleParam => (scaleParam.min <= slider.size.value && scaleParam.max >= slider.size.value)).zoom;
+    return this.scaleParams.find(scaleParam => (scaleParam.min <= slider.size.val() && scaleParam.max >= slider.size.val())).zoom;
   }
 }
 
 var element = {
-  minus               : document.getElementById("minus"),
-  plus                : document.getElementById("plus"),
-  radiusValue         : document.getElementById("radius-value"),
-  calculatedCost      : document.getElementById("calculated-cost"),
-  mouthlyCost         : document.getElementById("mouthly-cost"),
-  mouthlyLeads        : document.getElementById("mouthly-leads"),
-  estimateTotalCost   : document.getElementById("estimate-total-cost"),
-  minimumLoad         : document.getElementById("minimum-load"),
-  totalCost           : document.getElementById("total-cost"),
-  amountInput         : document.getElementsByName("amount"),
-  businessLatLng      : document.getElementsByName("business_latlng"),
-  userId              : document.getElementsByName("user_id"),
-  category            : document.getElementsByName("category"),
-  leadsFromMarkedArea : document.getElementsByName("leads_from_marked_area"),
-  leadsFromPeopleInterestedInArea : document.getElementsByName("leads_from_people_interested_in_area"),
+  minus               : $('#minus'),
+  plus                : $('#plus'),
+  radiusValue         : $('#radius-value'),
+  calculatedCost      : $('#calculated-cost'),
+  mouthlyCost         : $('#mouthly-cost'),
+  mouthlyLeads        : $('#mouthly-leads'),
+  estimateTotalCost   : $('#estimate-total-cost'),
+  minimumLoad         : $('#minimum-load'),
+  totalCost           : $('#total-cost'),
+  amountInput         : $('input[name="amount"]'),
+  businessLatLng      : $('input[name="business_latlng"]'),
+  userId              : $('input[name="user_id"]'),
+  category            : $('input[name="category"]'),
+  leadsFromMarkedArea : $('input[name="leads_from_marked_area"]'),
+  leadsFromPeopleInterestedInArea : $('input[name="leads_from_people_interested_in_area"]'),
   estimateOption      : true,
 
   
   disable: function(element){
-    element.classList.add('block-element');
+    element.addClass('block-element');
   },
   enable: function(element){
-    element.classList.remove('block-element');
+    element.removeClass('block-element');
   },
   clearNumber: function(number){
     return number.replace(/[\s.,%]/g, '');
@@ -110,66 +110,68 @@ var element = {
   },
   initElements: function(){
     this.updateElements();
-    if(slider.size.value == 1){
+    if(slider.size.val() == 1){
       element.disable(element.minus);
     }
-    if(slider.size.value == 100){
+    if(slider.size.val() == 100){
       element.disable(element.plus);
     }
   },
   updateElements: function(){
-    this.radiusValue.innerHTML = slider.size.value;
-    this.calculatedCost.innerHTML = this.formatNumber(this.clearNumber(this.radiusValue.innerHTML) * 100);
-    this.mouthlyCost.innerHTML = this.formatNumber(this.clearNumber(this.calculatedCost.innerHTML) * 30);
-    this.mouthlyLeads.innerHTML = this.formatNumber(this.clearNumber(this.radiusValue.innerHTML) * 30);
+    this.radiusValue.text(slider.size.val());
+    this.calculatedCost.text( this.formatNumber(this.clearNumber(this.radiusValue.text()) * 100) );
+    this.mouthlyCost.text( this.formatNumber(this.clearNumber(this.calculatedCost.text()) * 30) );
+    this.mouthlyLeads.text( this.formatNumber(this.clearNumber(this.radiusValue.text()) * 30) );
 
-    this.estimateTotalCost.innerHTML = this.formatNumber(this.mouthlyCost.innerHTML);
+    this.estimateTotalCost.text(this.formatNumber(this.mouthlyCost.text()));
     if(this.estimateOption){
-      this.totalCost.innerHTML = this.estimateTotalCost.innerHTML;
-      this.amountInput[0].value = this.clearNumber(this.estimateTotalCost.innerHTML);
+      this.totalCost.text(this.estimateTotalCost.text());
+      this.amountInput.val(this.clearNumber(this.estimateTotalCost.text()));
     }
   },
   changeOption: function(option){
     if(option == 'estimate-total-cost'){
-      this.minimumLoad.parentNode.parentNode.classList.remove('active');
-      this.estimateTotalCost.parentNode.parentNode.classList.add('active');
-      this.totalCost.innerHTML = this.estimateTotalCost.innerHTML;
-      this.amountInput[0].value = this.clearNumber(this.estimateTotalCost.innerHTML);
+      this.minimumLoad.parent().parent().removeClass('active');
+      this.estimateTotalCost.parent().parent().addClass('active');
+      this.totalCost.text(this.estimateTotalCost.text());
+      this.amountInput.val(this.clearNumber(this.estimateTotalCost.text()));
       this.estimateOption = true;
     }
     else{
-      this.estimateTotalCost.parentNode.parentNode.classList.remove('active');
-      this.minimumLoad.parentNode.parentNode.classList.add('active');
-      this.totalCost.innerHTML = this.minimumLoad.innerHTML;
-      this.amountInput[0].value = this.clearNumber(this.minimumLoad.innerHTML);
+      this.estimateTotalCost.parent().parent().removeClass('active');
+      this.minimumLoad.parent().parent().addClass('active');
+      this.totalCost.text(this.minimumLoad.text());
+      this.amountInput.val(this.clearNumber(this.minimumLoad.text()));
       this.estimateOption = false;
     }
   }
 }
 
 var slider = {
-  size: document.getElementById("radius-slider"),
+  size: $("#radius-slider"),
   minSize: 1,
   maxSize: 100,
 
   increaseValue: function(){
-    if (this.size.value <= this.maxSize){
-      this.size.value++;
+    if (this.size.val() <= this.maxSize){
+      let val = this.size.val()
+      this.size.val(parseInt(val)+1);
       this.updateValue();
       element.enable(element.minus);
     }
-    if(this.size.value == this.maxSize){
+    if(this.size.val() == this.maxSize){
       element.disable(element.plus);
     }
   },
 
   reduceValue: function(){
-    if(this.size.value >= this.minSize){
-      this.size.value--;
+    if(this.size.val() >= this.minSize){
+      let val = this.size.val()
+      this.size.val(parseInt(val)-1);
       this.updateValue();
       element.enable(element.plus);
     }
-    if(this.size.value == this.minSize){
+    if(this.size.val() == this.minSize){
       element.disable(element.minus);
     }
   },
@@ -182,7 +184,7 @@ var slider = {
 
   moveButton: function(){
     this.updateValue();
-    switch(this.size.value){
+    switch(this.size.val()){
       case '100': 
         element.enable(element.minus);
         element.disable(element.plus);
@@ -198,28 +200,30 @@ var slider = {
   }
 };
 
-document.getElementById('payButton').addEventListener('click', function(e){
+element.initElements();
+
+$('#payButton').on('click', function(e) {
   e.preventDefault();
   let data = {
-    'business_latlng' : element.businessLatLng[0].value,
-    'user_id' : element.userId[0].value,
-    'category' : element.category[0].value,
-    'amount' : element.amountInput[0].value,
-    'leads_from_marked_area' : element.leadsFromMarkedArea[0].checked,
-    'leads_from_people_interested_in_area' : element.leadsFromPeopleInterestedInArea[0].checked
+    'business_latlng' : element.businessLatLng.val(),
+    'user_id' : element.userId.val(),
+    'category' : element.category.val(),
+    'amount' : element.amountInput.val(),
+    'leads_from_marked_area' : element.leadsFromMarkedArea.is(':checked'),
+    'leads_from_people_interested_in_area' : element.leadsFromPeopleInterestedInArea.is(':checked')
   }
 
   alert(JSON.stringify(data));
+
+  $.ajax({
+    url: "https://google.com",
+    method: "POST",
+    data: data,
+    dataType: 'json'
+  }).done(function() {
+    alert('request successfully sent');
+  }).fail(function() {
+    alert('request failed');
+  });
   
-  /*var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'https://your.url', false);
-  xhr.send(JSON.stringify(data));
-  if (xhr.status != 200) {
-    alert( xhr.status + ': ' + xhr.statusText );
-  } else {
-    alert( xhr.responseText );
-  }*/
 });
-
-
-element.initElements();
